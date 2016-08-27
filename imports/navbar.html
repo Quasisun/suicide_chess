@@ -1,0 +1,86 @@
+<template name="navbar">  
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a class="navbar-brand">Suicide Chess</a>
+
+        <ul class="nav navbar-nav">
+          <li class="{{is_active_path '/leaderboard'}}">
+            <a href="/leaderboard">
+              <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+              Leaderboard
+            </a>
+          </li>
+
+          <li class="{{is_active_path '/'}}">
+            <a href="/">
+              <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span>
+              Play
+            </a>
+          </li>
+
+          {{#if currentUser}}
+          {{#unless in_game}}
+          {{#if is_active_path '/'}}
+          <li>
+              <!-- <form class="input-group challenge">
+                <span class="input-group-addon" id="basic-addon1">@</span>
+                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+              </form> -->
+              <a>
+                <form class="challenge">
+                  <input type="text" name="text" placeholder="Challenge another player" />
+                </form>
+              </a>
+          </li>
+          {{/if}}
+          {{/unless}}
+          {{/if}}
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          {{#if currentUser}}
+          <li>
+            <a class="dropdown">
+              <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                {{user_rating}}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                {{#each rating_history}}
+                  <li class="dropdown-item" >
+                    {{#if nonnegative delta}}
+                      <a align="right">
+                        <span style="color:silver">{{old_rating}} &nbsp; &nbsp; &nbsp; </span>
+                        
+                        <span class="glyphicon glyphicon-circle-arrow-up" aria-hidden="true" style="color:#387C44"></span>
+                        <strong style="color:#387C44">
+                          {{delta}}
+                        </strong>
+                      </a>
+                    {{else}}
+                      <a align="right">
+                        <span style="color:silver">{{old_rating}} &nbsp; &nbsp; &nbsp;</span>
+                        <span class="glyphicon glyphicon-circle-arrow-down" aria-hidden="true" style="color:#C24641"></span>
+                        <strong style="color:#C24641">
+                          {{absolute_value delta}}
+                        </strong>
+                      </a>
+                    {{/if}}
+                  </li>
+                {{/each}}
+              </ul>
+            </a>
+          </li>
+          {{/if}}
+        </ul>
+
+
+
+        <div class="nav navbar-right">
+        <div class="navbar-text">
+            {{> loginButtons align="right"}}
+
+        </div>   
+        </div>       
+      </div> <!-- / nav container -->
+  </nav> 
+</template>

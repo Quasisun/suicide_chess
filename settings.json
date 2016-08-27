@@ -1,0 +1,7 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb://quasisun:linguini1@ds011902.mlab.com:11902/schess"
+    }
+  }
+}
